@@ -1,0 +1,71 @@
+#cloud-config
+
+package_upgrade: false
+
+packages:
+  - qemu-guest-agent
+
+runcmd:
+  - [ systemctl, daemon-reload ]
+  - [ systemctl, enable, qemu-guest-agent ]
+  - [ systemctl, start, qemu-guest-agent ]
+
+ssh_pwauth: True
+chpasswd:
+  list: |
+     root:${root_passwd}
+  expire: False
+
+users:
+  - name: ${user}
+    gecos: ${user}
+    shell: /bin/bash
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    system: False
+    lock-passwd: false
+    ssh_authorized_keys: ${ssh_key}
+
+write_files:
+  - path: /etc/ssh/sshd_config
+    content: |
+         AcceptEnv LANG LC_*
+         AllowUsers ${user}
+         ChallengeResponseAuthentication no
+         HostbasedAuthentication no
+         HostKey /etc/ssh/ssh_host_dsa_key
+         HostKey /etc/ssh/ssh_host_ecdsa_key
+         HostKey /etc/ssh/ssh_host_ed25519_key
+         HostKey /etc/ssh/ssh_host_rsa_key
+         IgnoreRhosts yes
+         KeyRegenerationInterval 3600
+         LoginGraceTime 120
+         LogLevel INFO
+         PermitEmptyPasswords no
+         PermitRootLogin no
+         Port 22
+         PrintLastLog yes
+         PrintMotd no
+         Protocol 2
+         PubkeyAuthentication yes
+         RhostsRSAAuthentication no
+         RSAAuthentication yes
+         ServerKeyBits 1024
+         StrictModes yes
+         Subsystem sftp /usr/lib/openssh/sftp-server
+         SyslogFacility AUTH
+         TCPKeepAlive yes
+         UsePAM yes
+         UsePrivilegeSeparation yes
+         X11DisplayOffset 10
+         X11Forwarding yes
+
+growpart:
+    mode: auto
+    devices:
+      - "/"
+
+resize_rootfs: true
+
+timezone: ${time_zone}
+
+fqdn: ${hostname}
