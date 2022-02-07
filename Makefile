@@ -10,7 +10,7 @@ scope ?= "patch"
 .PHONY: release
 
 release:
-	$(SEMTAG) final -s $(scope)
+	$(SEMTAG) beta -s $(scope)
 
 
 # end
