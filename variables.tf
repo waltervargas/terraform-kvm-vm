@@ -1,4 +1,5 @@
 variable "vm" {
+  description = "VM Spec, look at default values for documentation"
   type = object({
     autostart              = bool
     base_volume_image_url  = string
@@ -23,14 +24,14 @@ variable "vm" {
     count                  = 1
     hostname               = "localhost"
     name_prefix            = "kvm"
-    memory                 = 1024
+    memory                 = 1024 // Mb
     network_interface_name = "ens3"
     root_passwd            = ""
-    root_volume_size       = 10
+    root_volume_size       = 10 // Gb
     ssh_key                = ""
     storage_pool_name      = "default"
     time_zone              = "Europe/Berlin"
-    username               = "walter"
+    username               = "debian"
     vcpu                   = 1
   }
 }
