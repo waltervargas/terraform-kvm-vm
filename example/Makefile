@@ -10,7 +10,7 @@ FLAGS=-var-file tfvars/$(NAME).tfvars
 
 init:
 	if ls .terraform 1> /dev/null 2>&1; then rm -rf .terraform; rm -rf .terraform.lock.hcl; fi
-	terraform init -backend-config=backend/$(NAME).tf
+	terraform init -backend-config=backend/$(NAME).tfvars
 
 plan:
 	terraform plan $(FLAGS)
