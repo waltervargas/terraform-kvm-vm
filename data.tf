@@ -54,7 +54,7 @@ locals {
 }
 
 data "template_cloudinit_config" "init_config" {
-  count         = var.vm.count
+  count         = var.vm.vm_count
   gzip          = false
   base64_encode = false
 
@@ -66,7 +66,7 @@ data "template_cloudinit_config" "init_config" {
 }
 
 data "template_file" "network_config" {
-  count    = var.vm.count
+  count    = var.vm.vm_count
   template = file("${path.module}/templates/network_dhcp.yaml")
   vars = {
     nic = var.vm.network_interface_name
