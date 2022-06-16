@@ -10,7 +10,10 @@ resource "libvirt_domain" "vm" {
   cloudinit = element(libvirt_cloudinit_disk.cloudinit.*.id, count.index)
 
   network_interface {
-    bridge         = var.vm.bridge_interface_name
+    network_id = var.network_id
+
+    bridge = var.network_id == "" ? var.vm.bridge_interface_name : ""
+
     wait_for_lease = true
     hostname       = format("${var.vm.name_prefix}%02d", count.index + 1)
   }
