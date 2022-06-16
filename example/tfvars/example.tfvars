@@ -15,3 +15,5 @@ vm = {
   username               = "walter"
   vcpu                   = 1
 }
+
+network_id = "0d55a52d-fe3d-423a-8f59-e6380a1bfe31"

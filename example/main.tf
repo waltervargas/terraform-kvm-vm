@@ -2,6 +2,8 @@ module "vm_example" {
   source = "../"
 
   vm = var.vm
+
+  network_id = var.network_id
 }
 
 output "name" {
