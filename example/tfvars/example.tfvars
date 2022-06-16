@@ -1,8 +1,9 @@
 vm = {
+  vm_count = 1
+
   autostart              = true
   base_volume_image_url  = "https://cdimage.debian.org/cdimage/cloud/buster/20211011-792/debian-10-generic-amd64-20211011-792.qcow2"
   bridge_interface_name  = "virbr0"
-  count                  = 1
   hostname               = "example"
   memory                 = 512
   name_prefix            = "example"

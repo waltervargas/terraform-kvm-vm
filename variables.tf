@@ -4,7 +4,7 @@ variable "vm" {
     autostart              = bool
     base_volume_image_url  = string
     bridge_interface_name  = string
-    count                  = string
+    vm_count               = number
     name_prefix            = string
     hostname               = string
     memory                 = string
@@ -21,7 +21,7 @@ variable "vm" {
     autostart              = true
     base_volume_image_url  = "https://cdimage.debian.org/cdimage/cloud/sid/daily/20210425-618/debian-sid-generic-amd64-daily-20210425-618.qcow2"
     bridge_interface_name  = "virbr0"
-    count                  = 1
+    vm_count               = 1
     hostname               = "localhost"
     name_prefix            = "kvm"
     memory                 = 1024 // Mb

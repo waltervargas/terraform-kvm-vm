@@ -1,5 +1,5 @@
 resource "libvirt_domain" "vm" {
-  count = var.vm.count
+  count = var.vm.vm_count
 
   name       = format("${var.vm.name_prefix}%02d", count.index + 1)
   memory     = var.vm.memory
@@ -46,7 +46,7 @@ resource "libvirt_volume" "base_volume" {
 }
 
 resource "libvirt_volume" "root_volume" {
-  count          = var.vm.count
+  count          = var.vm.vm_count
   name           = format("${var.vm.name_prefix}_root%02d.qcow2", count.index + 1)
   pool           = var.vm.storage_pool_name
   size           = 1024 * 1024 * 1024 * var.vm.root_volume_size
@@ -56,7 +56,7 @@ resource "libvirt_volume" "root_volume" {
 }
 
 resource "libvirt_cloudinit_disk" "cloudinit" {
-  count          = var.vm.count
+  count          = var.vm.vm_count
   name           = format("${var.vm.name_prefix}_init%2d.iso", count.index + 1)
   user_data      = data.template_cloudinit_config.init_config[count.index].rendered
   network_config = data.template_file.network_config[count.index].rendered

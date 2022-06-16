@@ -7,3 +7,6 @@ output "name" {
 output "ips" {
   value = libvirt_domain.vm.*.network_interface.0.addresses.0
 }
+output "count" {
+  value = var.vm.vm_count
+}
